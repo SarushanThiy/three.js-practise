@@ -15,3 +15,29 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 
 renderer.render(scene, camera);
+
+// Creates the torus 
+const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+const material = new THREE.MeshStandardMaterial({ color: 0xFF6347, });
+const torus = new THREE.Mesh(geometry, material);
+
+scene.add(torus);
+
+// Adds a light to show the model (point light acts like a bulb)
+const pointLight = new THREE.PointLight(0xffffff)
+pointLight.position.set(20, 20, 20)
+
+scene.add(pointLight);
+
+// Function to render the torus
+function animate() {
+  requestAnimationFrame(animate);
+
+  torus.rotation.x += 0.01;
+  torus.rotation.y += 0.005;
+  torus.rotation.z += 0.01;
+
+  renderer.render(scene, camera);
+}
+
+animate()
